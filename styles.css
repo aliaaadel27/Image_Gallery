@@ -1,6 +1,5 @@
 body {
     font-size: 1vw;
-    /* font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; */
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .background {
@@ -10,22 +9,20 @@ body {
     right: 0;
     bottom: 0;
     background-color: #2b2929;
-    background-size: cover; /* Cover the whole area */
-    /* filter: blur(); Apply blur effect */
+    background-size: cover; 
     z-index: -1; /* Send it behind other content */
 }
 .content{
     position: relative; /* Ensure it stays above the background */
-    z-index: 1; /* Bring the content above the blurred background */
-    color: #fff; /* Text color */
-    text-align: center; /* Center text */
-    padding: 20px; /* Add some padding */
+    z-index: 1; /* Bring the content above the background */
+    color: #fff; 
+    text-align: center; 
+    padding: 20px; 
 }
 
 .header {
     text-align: center;
     padding: 20px;
-    /* background-color: #f5f5f5; Light background */
     position: relative;
 }
 
@@ -33,7 +30,6 @@ body {
     display: inline-block;
     position: relative;
     font-size: 20px;
-    /* font-weight: bold; */
     color: #ffffff;
     margin: 0;
 }
@@ -59,39 +55,30 @@ body {
     margin: 20px;
     position: relative;
 }
-
-
-
-/* Carousel Container */
 .carousel-container {
     position: relative;
     width: 50%;
-    max-width: 800px; /* Set a maximum width for the carousel */
-    /* overflow: hidden; Hide overflow */
+    max-width: 800px; 
     margin: auto;
     
 }
 
-/* Carousel */
 .carousel {
     display: flex; /* Display images in a row */
     transition: transform 1s ease-in-out; /* Smooth transition */
     gap: 20px;
-    /* justify-content: center; Center images */
     transform-origin: center; /* Transform around the center */
 }
 
-/* Individual Image Styling */
 .carousel img {
-    width: 100%; /* Full width of the container */
-    height: auto; /* Maintain aspect ratio */
+    width: 100%; 
+    height: auto; 
     flex-shrink: 0; /* Prevent images from shrinking */
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
 
 }
 
-/* Button Styles */
 button {
     position: absolute;
     top: 50%;
@@ -118,28 +105,25 @@ button:hover {
 }
 
 
-/* Pagination Indicators */
 .pagination {
-    text-align: center; /* Center the pagination dots */
-    margin-top: 10px; /* Space above the dots */
+    text-align: center; 
+    margin-top: 10px;
     
 }
 
 .pagination .dot {
     display: inline-block;
-    width: 10px; /* Width of the dot */
-    height: 10px; /* Height of the dot */
-    margin: 0 5px; /* Space between dots */
-    border-radius: 50%; /* Make dots circular */
+    width: 10px; 
+    height: 10px; 
+    margin: 0 5px; 
+    border-radius: 50%;
     background-color: #7a7878; /* Inactive dot color */
-    cursor: pointer; /* Pointer cursor on hover */
+    cursor: pointer; 
 }
 
 .pagination .active {
     background-color: #ffffff; /* Active dot color */
 }
-
-
 
 /* Extra large screens (XXL) */
 @media (min-width: 1200px) {
@@ -148,21 +132,21 @@ button:hover {
     }
 }
 
-  /* Medium screens */
+/* Medium screens */
 @media (min-width: 768px) and (max-width: 1199px) {
     .body {
       font-size: 1.7vw;
     }
 }
 
-  /* Small screens */
+/* Small screens */
 @media (min-width: 576px) and (max-width: 767px) {
     .body {
       font-size: 1.5vw;
     }
 }
 
-  /* Tiny screens (like mobile phones) */
+/* Tiny screens (like mobile phones) */
 @media (max-width: 575px) {
     .body {
       font-size: 2.5vw;

@@ -4,14 +4,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalImages = images.length;
     let currentIndex = 0;
     let isGoingForward = true;
-    const intervalTime = 4000; 
+    const intervalTime = 4000; // Autoplay interval (4 seconds)
     let slideInterval;
 
     // Variables for touch control
-    let startX = 0;
-    let isSwiping = false;
+    let startX = 0; // Tracks starting point of touch
+    let isSwiping = false; // Tracks if user is swiping
 
-    // Function to update carousel position
+
+    // Adjusts the position of the carousel to center the active image.
     function updateCarousel() {
         const containerWidth = document.querySelector('.carousel-container').offsetWidth;
         const imageWidth = images[currentIndex].offsetWidth;
@@ -20,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updatePagination();
     }
 
-    // Function to go to the next or previous image based on direction
+    // Automatically changes the image at regular intervals.
     function changeImage() {
         if (isGoingForward) {
             if (currentIndex < totalImages - 1) {
@@ -40,12 +41,11 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCarousel();
     }
 
-    // Automatic image slider
+    
     function startSlider() {
-        slideInterval = setInterval(changeImage, intervalTime);
+        slideInterval = setInterval(changeImage, intervalTime);// Start automatic sliding
     }
 
-    // Pause the slider on hover
     function stopSlider() {
         clearInterval(slideInterval);
     }
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Create pagination dots dynamically
+    // Creates dots that represent each image, allowing manual navigation.
     function createPagination() {
         const paginationContainer = document.querySelector('.pagination');
         for (let i = 0; i < totalImages; i++) {
