@@ -3,15 +3,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const images = document.querySelectorAll('.carousel img');
     const totalImages = images.length;
     let currentIndex = 0;
-    let isGoingForward = true; // Track the direction of movement
-    const intervalTime = 4000; // 4 seconds for autoplay
+    let isGoingForward = true;
+    const intervalTime = 4000; 
     let slideInterval;
+
+    // Variables for touch control
+    let startX = 0;
+    let isSwiping = false;
 
     // Function to update carousel position
     function updateCarousel() {
-        const translateXValue = -currentIndex * 100; // Move by 100% of the width of the container
-        carousel.style.transform = `translateX(${translateXValue}%)`;
-        updatePagination(); // Update the active pagination dot
+        const containerWidth = document.querySelector('.carousel-container').offsetWidth;
+        const imageWidth = images[currentIndex].offsetWidth;
+        const translateXValue = -currentIndex * (imageWidth + 20) + (containerWidth - imageWidth) / 2;
+        carousel.style.transform = `translateX(${translateXValue}px)`;
+        updatePagination();
     }
 
     // Function to go to the next or previous image based on direction
@@ -20,15 +26,15 @@ document.addEventListener('DOMContentLoaded', function() {
             if (currentIndex < totalImages - 1) {
                 currentIndex++;
             } else {
-                isGoingForward = false; // Reverse direction
-                currentIndex--; // Start moving backward
+                isGoingForward = false;
+                currentIndex--;
             }
         } else {
             if (currentIndex > 0) {
                 currentIndex--;
             } else {
-                isGoingForward = true; // Switch direction again
-                currentIndex++; // Start moving forward
+                isGoingForward = true;
+                currentIndex++;
             }
         }
         updateCarousel();
@@ -59,15 +65,46 @@ document.addEventListener('DOMContentLoaded', function() {
             const dot = document.createElement('div');
             dot.classList.add('dot');
             dot.addEventListener('click', function() {
-                currentIndex = i; // Set currentIndex to the clicked dot's index
-                updateCarousel(); // Update carousel position
-                isGoingForward = currentIndex !== totalImages - 1; // Adjust direction based on clicked image
-                // isGoingForward=true;
+                currentIndex = i;
+                updateCarousel();
+                isGoingForward = currentIndex !== totalImages - 1;
             });
             paginationContainer.appendChild(dot);
         }
-        updatePagination(); // Update pagination initially
+        updatePagination();
     }
+
+    // Swipe handling
+    carousel.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX; // Get initial touch point
+        isSwiping = true; // Enable swipe tracking
+        stopSlider(); // Stop automatic sliding when swiping
+    });
+
+    carousel.addEventListener('touchmove', (e) => {
+        if (!isSwiping) return; // Exit if not swiping
+        const moveX = e.touches[0].clientX;
+        const diffX = startX - moveX;
+
+        // Check if swipe is significant (prevent small accidental swipes)
+        if (Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                // Swipe left - show next image
+                isGoingForward = true;
+                changeImage();
+            } else {
+                // Swipe right - show previous image
+                isGoingForward = false;
+                changeImage();
+            }
+            isSwiping = false; // Disable swipe tracking after action
+        }
+    });
+
+    carousel.addEventListener('touchend', () => {
+        isSwiping = false; // Reset swipe tracking on touch end
+        startSlider(); // Resume automatic sliding after swipe
+    });
 
     // Event listeners for navigation buttons
     document.querySelector('.next').addEventListener('click', function() {

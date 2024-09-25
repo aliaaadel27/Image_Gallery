@@ -77,6 +77,8 @@ body {
     display: flex; /* Display images in a row */
     transition: transform 1s ease-in-out; /* Smooth transition */
     gap: 20px;
+    /* justify-content: center; Center images */
+    transform-origin: center; /* Transform around the center */
 }
 
 /* Individual Image Styling */
